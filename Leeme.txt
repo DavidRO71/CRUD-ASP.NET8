@@ -1,0 +1,50 @@
+Creación del proyecto con el CLI:
+    dotnet new mvc -o CRUD-NET8 
+
+Instalación de los paquetes nuggets:
+    dotnet add package MySql.EntityFrameworkCore --version 8.0.0
+    dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.0
+    dotnet add package MySqlConnector --version 2.4.0
+    dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+
+Base de Datos:
+    DROP TABLE IF EXISTS tipo_usuario;
+    CREATE TABLE tipo_usuario (
+    tusu_id int(11) NOT NULL AUTO_INCREMENT,
+    tusu_desc varchar(100) NOT NULL,
+    tusu_obs text DEFAULT NULL,
+    tusu_activo tinyint(1) DEFAULT '1',
+    temporal_text varchar(2000) DEFAULT NULL,
+    temporal_id int(11) DEFAULT NULL,
+    tusu_uc varchar(25) DEFAULT NULL,
+    tusu_fc timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    tusu_um varchar(25) DEFAULT NULL,
+    tusu_fm datetime DEFAULT NULL,
+    PRIMARY KEY (tusu_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+    DROP TABLE IF EXISTS usuario;
+    CREATE TABLE usuario (
+    usu_id int(11) NOT NULL AUTO_INCREMENT,
+    usu_login varchar(25) NOT NULL,
+    usu_pwd varchar(250) NOT NULL,
+    usu_nombre varchar(100) NOT NULL,
+    usu_apellido varchar(100) NOT NULL,
+    tusu_id int(11) NOT NULL COMMENT 'tabla tipo_usuario',
+    usu_activo tinyint(1) DEFAULT '1',
+    usu_busqueda varchar(2000) DEFAULT NULL,
+    temporal_id int(11) DEFAULT NULL,
+    temporal_text varchar(2000) DEFAULT NULL,
+    usu_uc varchar(25) DEFAULT NULL,
+    usu_fc timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    usu_um varchar(25) DEFAULT NULL,
+    usu_fm datetime DEFAULT NULL,
+    PRIMARY KEY (usu_id),
+    UNIQUE KEY usu_login (usu_login),
+    FOREIGN KEY(tusu_id) REFERENCES tipo_usuario(tusu_id)
+        ON DELETE RESTRICT ON UPDATE RESTRICT
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+Generar automaticamente los modelos:
+    CRUD-NET8 % dotnet ef dbcontext scaffold "server=XXXX;user id=XXXX;password=XXXX;port=3306;database=XXXX;" MySql.EntityFrameworkCore --output-dir Models --context-dir Context --context-namespace myDBContext
+
