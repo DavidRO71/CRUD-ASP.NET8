@@ -2,10 +2,15 @@
 
 <h1>Tipo de Usuarios</h1>
 
+<p>
+    <a asp-action="Crear">Crear</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>Descripción</th>
+            <th>Observaciones</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +18,9 @@
             <tr>
                 <td>
                     @tipo_usuario.TusuDesc
+                </td>
+                <td>
+                    @tipo_usuario.TusuObs
                 </td>
             </tr>
         }

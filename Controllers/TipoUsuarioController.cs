@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Context;
+using CRUD_NET8.DTO;
+using CRUD_NET8.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace CRUD_NET8.Controllers
 {
@@ -33,6 +29,29 @@ namespace CRUD_NET8.Controllers
         public IActionResult Error()
         {
             return View("Error!");
+        }
+
+        public IActionResult Crear(){
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]  //Es para que la información la coja del formulario
+        public async Task<IActionResult> Crear(TipoUsuarioCreateDTO tipoUsuarioDTO){
+            //Vamos a utilizar un DTO pero para nuestro ejemplo
+            if (ModelState.IsValid) {
+                var tipoUsuario = new TipoUsuario(){
+                    TusuDesc = tipoUsuarioDTO.TusuDesc,
+                    TusuObs = tipoUsuarioDTO.TusuObs,
+                };
+                _myDBContext.Add(tipoUsuario);
+                await _myDBContext.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(tipoUsuarioDTO);
+
         }
     }
 }
