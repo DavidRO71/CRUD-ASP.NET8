@@ -11,9 +11,9 @@ namespace CRUD_NET8.Controllers
     {
         private readonly ILogger<TipoUsuarioController> _logger;
 
-        private readonly myDBContext _myDBContext;
+        private readonly MyDBContext _myDBContext;
 
-        public TipoUsuarioController(ILogger<TipoUsuarioController> logger, myDBContext myDBContext)
+        public TipoUsuarioController(ILogger<TipoUsuarioController> logger, MyDBContext myDBContext)
         {
             _logger = logger;
             _myDBContext = myDBContext;

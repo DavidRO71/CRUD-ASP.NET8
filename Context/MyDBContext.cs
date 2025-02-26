@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Context;
 
-public partial class myDBContext : DbContext
+public partial class MyDBContext : DbContext
 {
-    public myDBContext()
+    public MyDBContext()
     {
     }
 
-    public myDBContext(DbContextOptions<myDBContext> options)
+    public MyDBContext(DbContextOptions<MyDBContext> options)
         : base(options)
     {
     }

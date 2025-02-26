@@ -11,9 +11,9 @@ namespace CRUD_NET8.Controllers
     public class UsuarioController : Controller
     {
         private readonly ILogger<UsuarioController> _logger;
-        private readonly myDBContext _myDBContext;
+        private readonly MyDBContext _myDBContext;
 
-        public UsuarioController(ILogger<UsuarioController> logger, myDBContext myDBContext)
+        public UsuarioController(ILogger<UsuarioController> logger, MyDBContext myDBContext)
         {
             _logger = logger;
             _myDBContext = myDBContext;
