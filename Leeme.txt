@@ -48,3 +48,7 @@ Base de Datos:
 Generar automaticamente los modelos:
     CRUD-NET8 % dotnet ef dbcontext scaffold "server=XXXX;user id=XXXX;password=XXXX;port=3306;database=XXXX;" MySql.EntityFrameworkCore --output-dir Models --context-dir Context --context-namespace myDBContext
 
+
+dotnet build
+dotnet restore
+dotnet watch run

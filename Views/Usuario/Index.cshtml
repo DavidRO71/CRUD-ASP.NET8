@@ -2,25 +2,36 @@
 
 <h1>Usuarios</h1>
 
-<p>
-    <a asp-action="Crear">Crear</a>
+<p style="text-align: right;">
+    @* <a asp-action="Crear">Crear</a> *@
+    <a asp-action="Crear" class="btn btn-primary btn-sm">Crear</a>
 </p>
 
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Usuario</th>
-            <th>Descripción</th>
+            <th>Tipo de Usuario</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var usuario in Model){
             <tr>
                 <td>
+                    @usuario.UsuId
+                </td>
+                <td>
                     @usuario.UsuNombre
                 </td>
                 <td>
                     @Html.DisplayFor(m => usuario.Tusu.TusuDesc)
+                </td>
+                <td>
+                     <a asp-action="Editar" asp-route-id="@usuario.UsuId" class="btn btn-success btn-sm">Editar</a>
+                     <a asp-action="Eliminar" asp-route-id="@usuario.UsuId" class="btn btn-danger btn-sm"
+                        onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">Eliminar</a>
                 </td>
             </tr>
         }

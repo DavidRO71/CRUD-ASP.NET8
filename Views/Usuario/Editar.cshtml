@@ -1,0 +1,49 @@
+@using CRUD_NET8.Models
+@model Usuario
+
+<h1>Editar el usuario: @Model.UsuId</h1>
+<hr>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Usuario" asp-action="Editar" method="post" >
+            <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input name="UsuId" value="@Model.UsuId" />
+            <div class="form-group">
+                <label asp-for="UsuLogin" class="control-label"></label>
+                <input asp-for="UsuLogin" class="form-control" value="@Model.UsuLogin"/>
+                <span asp-validation-for="UsuLogin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuPwd" class="control-label"></label>
+                <input asp-for="UsuPwd" class="form-control" />
+                <span asp-validation-for="UsuPwd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuNombre" class="control-label"></label>
+                <input asp-for="UsuNombre" class="form-control" />
+                <span asp-validation-for="UsuNombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UsuApellido" class="control-label"></label>
+                <input asp-for="UsuApellido" class="form-control" />
+                <span asp-validation-for="UsuApellido" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="TusuId" class="control-label"></label>
+                <select asp-for="TusuId" class="form-control" asp-items="ViewBag.TipoUsuario"></select>
+                <span asp-validation-for="TusuId" class="text-danger"></span>
+            </div>
+            <hr>
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div> 
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

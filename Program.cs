@@ -6,8 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<MyDBContext>(
-    options => options.UseMySQL(builder.Configuration.GetConnectionString("MiConnexionMySQL")));
+// builder.Services.AddDbContext<MyDBContext>(
+//     options => options.UseMySQL(builder.Configuration.GetConnectionString("MiConnexionMySQL")));
+
+builder.Services.AddDbContext<MyDBContext>(options =>
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("MiConnexionMySQL"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MiConnexionMySQL"))
+    ));
+
 
 var app = builder.Build();
 
