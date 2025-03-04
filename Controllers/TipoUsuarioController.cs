@@ -22,8 +22,21 @@ namespace CRUD_NET8.Controllers
         //*******************************************************
         //* V O L V E R   A   L A   P A G I N A   I N I C I A L
         //*******************************************************
-        public IActionResult Volver(){
-            return RedirectToAction("Index");
+        // public IActionResult Volver(){
+        //     Console.WriteLine("Entro salir");
+        //     TempData["Mensaje"] = "Cancelación del usuario";
+        //     return RedirectToAction("Index");
+        // }
+        [HttpPost]
+        public IActionResult Volver()
+        {
+            // Lógica para el botón "Volver"
+            // Console.WriteLine("Se presionó el botón Volver.");
+            TempData["Titulo"]  = "Cancelación";
+            TempData["Mensaje"] = "Cancelación del usuario";
+            TempData["Icono"]   = "error";
+            // Redirigir o realizar la acción correspondiente
+            return RedirectToAction("Index"); // O la vista que necesites
         }
         
         //*******************************************************
@@ -45,6 +58,7 @@ namespace CRUD_NET8.Controllers
         //* C R E A R
         //*******************************************************
         public IActionResult Crear(){
+            TempData["Mensaje"] = null;
             return View();
         }
 
@@ -60,11 +74,17 @@ namespace CRUD_NET8.Controllers
                 _myDBContext.Add(tipoUsuario);
                 await _myDBContext.SaveChangesAsync();
 
+                TempData["Titulo"]  = "Exitosamente";
+                TempData["Mensaje"] = "Tipo de usuario se ha creado correctamente.";
+                TempData["Icono"]   = "success";
+
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(tipoUsuarioDTO);
+            TempData["Icono"] = "error";
+            TempData["Mensaje"] = "Tipo de usuario no valido.";
 
+            return View(tipoUsuarioDTO);
         }
 
         //*******************************************************
@@ -72,6 +92,8 @@ namespace CRUD_NET8.Controllers
         //*******************************************************
         public IActionResult Editar(int id)
         {
+            TempData["Titulo"]  = null;
+            TempData["Mensaje"] = null;
             var tipoUsuarioModif = _myDBContext.TipoUsuarios.Where(x => x.TusuId == id).FirstOrDefault();
             return View(tipoUsuarioModif);
         }
@@ -80,7 +102,7 @@ namespace CRUD_NET8.Controllers
         [ValidateAntiForgeryToken]  //Es para que la información la coja del formulario
         public async Task<IActionResult> Editar(TipoUsuario tipoUsuarioModif)
         {
-            Console.WriteLine("ID Usuario Editar: " + tipoUsuarioModif.TusuId);
+            // Console.WriteLine("ID Usuario Editar: " + tipoUsuarioModif.TusuId);
             if (tipoUsuarioModif.TusuId > 0) {
 
                 var miTipoUsuario = await _myDBContext.TipoUsuarios.FirstOrDefaultAsync(x => x.TusuId == tipoUsuarioModif.TusuId);
@@ -93,12 +115,40 @@ namespace CRUD_NET8.Controllers
                 miTipoUsuario.TusuObs = tipoUsuarioModif.TusuObs;
             
                 await _myDBContext.SaveChangesAsync();
+                TempData["Titulo"]  = "Exitosamente";
                 TempData["Mensaje"] = "Tipo de usuario actualizado correctamente.";
+                TempData["Icono"]   = "success";
 
-                return RedirectToAction(nameof(Index));
+                // return RedirecktToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             //Console.WriteLine("Usuario NO valido: ");
+            TempData["Titulo"]  = "Error";
             TempData["Mensaje"] = "Tipo de usuario no valido.";
+            TempData["Icono"]   = "error";
+
+            return RedirectToAction("Index");
+        }
+
+        //*******************************************************
+        //* E L I M I N A R 
+        //*******************************************************
+        public IActionResult Eliminar(int id)
+        {
+            // Console.WriteLine("ID Eliminar: " + id); // o
+            // Console.WriteLine($"ID Eliminar: {id}");
+            var tipoUsuarioEliminar = _myDBContext.TipoUsuarios.FirstOrDefault(x => x.TusuId == id);
+            
+            if (tipoUsuarioEliminar != null)
+            {
+                _myDBContext.TipoUsuarios.Remove(tipoUsuarioEliminar);
+                _myDBContext.SaveChanges();
+                TempData["Mensaje"] = "Usuario eliminado correctamente.";
+            }
+            else
+            {
+                TempData["Error"] = "Usuario no encontrado.";
+            }
 
             return RedirectToAction("Index");
         }
