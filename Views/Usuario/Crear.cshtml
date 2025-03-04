@@ -5,8 +5,8 @@
 <hr>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Crear">
-            <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="Crear" method="post">
+            @* <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div> *@
 
             <div class="form-group">
                 <label asp-for="UsuLogin" class="control-label"></label>
@@ -35,9 +35,11 @@
             </div>
             <hr>
             <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
+                <input type="submit" name="submitButton" value="Crear"  class="btn btn-primary btn-sm" />
+                <a asp-action="Index" class="btn btn-warning btn-sm">Volver</a>
             </div>
         </form>
+       
     </div>
 </div> 
 
