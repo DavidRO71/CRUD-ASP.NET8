@@ -1,13 +1,14 @@
-@using CRUD_NET8.DTO
-@model TipoUsuarioCreateDTO
+@using CRUD_NET8.Models
+@model TipoUsuario
 
-<h1>Creación de un nuevo Tipo de usuario</h1>
+<h1>Editar el tipo de usuario: @Model.TusuId</h1>
 <hr>
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Crear" method="post">
+        <form asp-controller="TipoUsuario" asp-action="Editar" method="post" >
             <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <input name="TusuId" value="@Model.TusuId" />
             <div class="form-group">
                 <label asp-for="TusuDesc" class="control-label"></label>
                 <input asp-for="TusuDesc" class="form-control" />
@@ -20,8 +21,8 @@
             </div>
             <hr>
             <div class="form-group">
-                <input type="submit"  class="btn btn-primary btn-sm" />
-                <a asp-action="Index" class="btn btn-warning btn-sm">Volver</a>
+                <input type="submit" value="Editar" class="btn btn-primary" />
+                <input type="submit" value="Volver" class="btn btn-warning" />
             </div>
         </form>
     </div>
