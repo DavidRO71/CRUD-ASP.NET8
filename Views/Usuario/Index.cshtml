@@ -3,9 +3,27 @@
 <h1>Usuarios</h1>
 
 <p style="text-align: right;">
-    @* <a asp-action="Crear">Crear</a> *@
     <a asp-action="Crear" class="btn btn-primary btn-sm">Crear</a>
 </p>
+
+@if (TempData["Mensaje"] != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Swal.fire({
+                title: '@TempData["Titulo"]',
+                html: '@TempData["Mensaje"]',       //Usuarios html eliminar lugar de text para los accentos
+                icon: '@TempData["Icono"]',
+                confirmButtonText: 'Aceptar',
+                timer: 4000,                        // 4000 milisegundos = 4 segundos
+                timerProgressBar: true,             // Opcional: agregar barra de progreso durante el tiempo
+                willClose: () => {
+                    // Puedes agregar acciones que ocurran cuando se cierre el popup
+                }
+            });
+        };
+    </script>
+}
 
 <table class="table">
     <thead>

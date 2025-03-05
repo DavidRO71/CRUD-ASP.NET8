@@ -21,12 +21,13 @@
             <hr>
             
             <div class="d-flex justify-content-between" >
+                <!-- Formulario para validar los cambios -->
                 <form asp-controller="TipoUsuario" asp-action="Editar" method="post">
                     <input type="hidden" name="TusuId" value="@Model.TusuId" />
                     <input type="submit" name="action" value="Editar" class="btn btn-primary" />
                 </form>
                 
-                <!-- Formulario para Volver al lado del formulario Editar -->
+                <!-- Formulario para Volver al Index -->
                 <form asp-controller="TipoUsuario" asp-action="Volver" method="post" >
                     <input type="submit" name="action" value="Volver" class="btn btn-warning" />
                 </form>

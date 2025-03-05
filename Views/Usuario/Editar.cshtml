@@ -8,7 +8,7 @@
         <form asp-controller="Usuario" asp-action="Editar" method="post" >
             <div asp-asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input name="UsuId" value="@Model.UsuId" />
+            @* <input name="UsuId" value="@Model.UsuId" readonly/> *@
             <div class="form-group">
                 <label asp-for="UsuLogin" class="control-label"></label>
                 <input asp-for="UsuLogin" class="form-control" value="@Model.UsuLogin"/>
@@ -35,9 +35,17 @@
                 <span asp-validation-for="TusuId" class="text-danger"></span>
             </div>
             <hr>
-            <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary" />
-                <input type="submit" value="Volver" class="btn btn-warning" />
+            <div class="d-flex justify-content-between" >
+                <!-- Formulario para validar los cambios -->
+                <form asp-controller="Usuario" asp-action="Editar" method="post">
+                    <input type="hidden" name="UsuId" value="@Model.UsuId" />
+                    <input type="submit" name="action" value="Editar" class="btn btn-primary" />
+                </form>
+                
+                <!-- Formulario para Volver al Index -->
+                <form asp-controller="Usuario" asp-action="Volver" method="post" >
+                    <input type="submit" name="action" value="Volver" class="btn btn-warning" />
+                </form>
             </div>
         </form>
     </div>
