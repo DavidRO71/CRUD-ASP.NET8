@@ -488,4 +488,3 @@ bin
 obj
 obj/Debug/net8.0/CRUD-NET8.AssemblyInfo.cs
 obj/Debug/net8.0/CRUD-NET8.AssemblyInfoInputs.cache
-appsettings.json
