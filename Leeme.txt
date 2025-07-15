@@ -6,6 +6,7 @@ Instalación de los paquetes nuggets:
     dotnet add package Microsoft.EntityFrameworkCore.Tools --version 8.0.0
     dotnet add package MySqlConnector --version 2.4.0
     dotnet add package Microsoft.EntityFrameworkCore.Design --version 8.0.0
+    dotnet add package DotNetEnv
 
 Base de Datos:
     DROP TABLE IF EXISTS tipo_usuario;
